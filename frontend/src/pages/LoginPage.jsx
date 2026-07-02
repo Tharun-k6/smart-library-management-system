@@ -25,6 +25,12 @@ const roleConfig = {
   },
 };
 
+const loginTips = [
+  'Choose the portal that matches your role before signing in.',
+  'Use the seeded demo account that matches the selected portal.',
+  'If you see a role mismatch, switch to the correct portal and try again.',
+];
+
 export default function LoginPage({ expectedRole }) {
   const navigate = useNavigate();
   const { login, logout } = useAuth();
@@ -85,6 +91,19 @@ export default function LoginPage({ expectedRole }) {
               </button>
             ))}
           </div>
+
+          <div className="mt-8 rounded-3xl border border-white/10 bg-slate-950/50 p-5">
+            <p className="text-sm uppercase tracking-[0.28em] text-slate-500">Login guide</p>
+            <ul className="mt-4 space-y-3 text-sm leading-6 text-slate-300">
+              {loginTips.map((tip) => (
+                <li key={tip} className="flex gap-3">
+                  <span className="mt-1 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-emerald-500/15 text-xs text-emerald-200">•</span>
+                  <span>{tip}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
         </section>
 
         <form onSubmit={submit} className="space-y-5 p-8 lg:p-12">
@@ -96,6 +115,9 @@ export default function LoginPage({ expectedRole }) {
           {error && <div className="rounded-2xl border border-red-400/20 bg-red-500/10 px-4 py-3 text-sm text-red-200">{error}</div>}
           <input className="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 outline-none transition focus:border-brand-400 focus:ring-2 focus:ring-brand-500/20" placeholder="Email" value={form.email} onChange={(event) => setForm({ ...form, email: event.target.value })} />
           <input className="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 outline-none transition focus:border-brand-400 focus:ring-2 focus:ring-brand-500/20" placeholder="Password" type="password" value={form.password} onChange={(event) => setForm({ ...form, password: event.target.value })} />
+          <p className="text-sm leading-6 text-slate-400">
+            Tip: if you are reviewing the app, pick a role on the left, then use the matching seeded account to enter the dashboard.
+          </p>
           <button disabled={loading || !expectedRole} className="w-full rounded-2xl bg-gradient-to-r from-brand-500 to-emerald-400 px-4 py-3 font-semibold text-white shadow-lg shadow-brand-500/20 hover:brightness-110 disabled:opacity-60">
             {loading ? 'Signing in...' : expectedRole ? `Enter ${expectedRole.toLowerCase()} portal` : 'Select a role first'}
           </button>

@@ -6,6 +6,7 @@ const highlights = [
   { title: 'Role-aware portals', copy: 'Admins, librarians, and students each get the right tools without clutter.' },
   { title: 'Connected workflows', copy: 'Books, reservations, reports, analytics, and notifications are wired together.' },
   { title: 'Search-friendly homepage', copy: 'A public root page with a clear title, description, and clean entry path.' },
+  { title: 'Submission-ready story', copy: 'The landing page explains the product, the roles, and the reviewer flow in one place.' },
 ];
 
 const showcaseStats = [
@@ -35,6 +36,18 @@ const featuredBooks = [
     meta: 'Productivity / Random House',
     summary: 'A clear, readable title that resonates well in demo and student workflows.',
   },
+];
+
+const reviewSteps = [
+  'Open the public homepage and read the product summary.',
+  'Use the demo credentials to enter the secure dashboard.',
+  'Show the catalog tools, then finish with analytics and reservations.',
+];
+
+const platformBenefits = [
+  'Public root page for quick access and sharing',
+  'Consistent page titles and metadata for search and browser clarity',
+  'Curated sample data to make the submission feel complete',
 ];
 
 const demoAccounts = [
@@ -68,6 +81,15 @@ export default function LandingPage() {
                 Start with a clean public homepage, enter secure role-based portals, and manage the full workflow from catalog to analytics with confidence.
               </p>
 
+              <div className="mt-8 grid gap-3 rounded-3xl border border-white/10 bg-white/5 p-5 sm:grid-cols-3">
+                {platformBenefits.map((item) => (
+                  <div key={item} className="text-sm leading-6 text-slate-300">
+                    <span className="mr-2 text-emerald-300">•</span>
+                    {item}
+                  </div>
+                ))}
+              </div>
+
               <div className="mt-8 flex flex-wrap gap-3">
                 <Link to="/login" className="rounded-2xl bg-brand-500 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-brand-500/20 hover:bg-brand-600">
                   Sign in
@@ -96,6 +118,20 @@ export default function LandingPage() {
                     <p className="mt-2 text-sm leading-6 text-slate-400">{item.copy}</p>
                   </article>
                 ))}
+              </div>
+
+              <div className="mt-10 rounded-3xl border border-white/10 bg-slate-950/60 p-6">
+                <p className="text-sm uppercase tracking-[0.28em] text-slate-500">Reviewer flow</p>
+                <ol className="mt-4 space-y-3 text-sm leading-7 text-slate-300">
+                  {reviewSteps.map((step, index) => (
+                    <li key={step} className="flex gap-3">
+                      <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-brand-500/20 text-xs font-semibold text-brand-200">
+                        {index + 1}
+                      </span>
+                      <span>{step}</span>
+                    </li>
+                  ))}
+                </ol>
               </div>
             </div>
 
